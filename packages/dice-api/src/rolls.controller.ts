@@ -6,7 +6,7 @@ import {
   Query,
   Logger,
   ParseIntPipe,
-  DefaultValuePipe
+  DefaultValuePipe,
 } from '@nestjs/common';
 import { DbService } from './db.service';
 
@@ -31,7 +31,7 @@ export class RollsController {
   @Get('history')
   async getRollsHistory(
     @Query('max', new DefaultValuePipe(10), ParseIntPipe) max: number,
-    @Query('sides', new DefaultValuePipe(6), ParseIntPipe) sides: number
+    @Query('sides', new DefaultValuePipe(6), ParseIntPipe) sides: number,
   ) {
     this.logger.log(`Retrieving last ${max} rolls history [sides: ${sides}]`);
     const rolls = await this.db.getLastRolls(max, sides);
